@@ -2,3 +2,5 @@ django==4.2.2
 pillow==9.5.0
 psycopg2-binary==2.9.6
 python-decouple==3.8
+django-phonenumber-field==7.1.0
+phonenumbers==8.13.15

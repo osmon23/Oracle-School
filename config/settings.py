@@ -32,11 +32,12 @@ ALLOWED_HOSTS = env_config('ALLOWED_HOSTS').split(',')
 
 # Application definition
 MY_APPS = [
-
+    'apps.accounts',
+    'apps.school',
 ]
 
 THIRD_PARTY_APPS = [
-
+    'phonenumber_field',
 ]
 
 INSTALLED_APPS = [
@@ -140,7 +141,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'accounts.CustomUser'
+AUTH_USER_MODEL = 'accounts.Teacher'
 
 # PHONENUMBER DEFAULT REGION
 PHONENUMBER_DEFAULT_REGION = 'KG'
