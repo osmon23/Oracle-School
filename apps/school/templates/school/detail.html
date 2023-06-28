@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ student.full_name }}{% endblock title %}
+
+{% block content %}
+<div id="wrapper">
+    <div class="student-details">
+        <div class="photo-wrapper">
+            <img src="{{ student.photo.url }}" alt="{{ student.full_name }}" width="450"/>
+        </div>
+        <div class="info-wrapper">
+            <h2>Full name: {{ student.full_name }}</h2>
+            <p>Address: {{ student.address }}</p>
+            <p>Date of Birth: {{ student.date_of_birth }}</p>
+            <p>Email: {{ student.email }}</p>
+            <p>Gender: {{ student.gender }}</p>
+            <div class="actions">
+                <a href="{% url 'update_student' student.id %}" class="btn btn-edit">Update</a>
+                <form action="{% url 'delete_student' student.id %}" method="POST" class="delete-form">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-delete">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="push"></div>
+{% endblock content %}

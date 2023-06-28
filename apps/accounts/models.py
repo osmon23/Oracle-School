@@ -13,9 +13,9 @@ class Teacher(AbstractUser):
         unique=True,
         max_length=13,
     )
-    classroom = models.CharField(
-        _('Classroom'),
-        max_length=100,
+    grade = models.CharField(
+        _('Grade'),
+        max_length=255,
         null=True,
         blank=True,
     )
@@ -50,9 +50,9 @@ class Student(models.Model):
         _('Date of birth'),
         default=None,
     )
-    classroom = models.CharField(
-        _('Classroom'),
-        max_length=100,
+    grade = models.CharField(
+        _('Grade'),
+        max_length=255,
         null=True,
         blank=True,
     )
@@ -68,7 +68,9 @@ class Student(models.Model):
     )
     photo = models.ImageField(
         _('Photo'),
-        upload_to='students/',
+        upload_to='students',
+        null=True,
+        blank=True,
     )
 
     def __str__(self):

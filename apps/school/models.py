@@ -4,30 +4,32 @@ from django.utils.translation import gettext_lazy as _
 from apps.accounts.models import Teacher, Student
 
 
-class Classroom(models.Model):
+class Grade(models.Model):
     name = models.CharField(
-        _('Classroom name'),
+        _('Grade Name'),
         max_length=255,
     )
     teacher = models.OneToOneField(
         Teacher,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         verbose_name=_('Teacher'),
-        related_name='classroom_teacher',
+        related_name='grade_teacher',
+        null=True,
+        blank=True,
     )
-    student = models.ForeignKey(
+    student = models.ManyToManyField(
         Student,
-        on_delete=models.CASCADE,
         verbose_name=_('Student'),
-        related_name='classroom_student',
+        related_name='grade_student',
+        blank=True,
     )
 
     def __str__(self):
         return self.name
 
     class Meta:
-        verbose_name = _('Classroom')
-        verbose_name_plural = _('Classrooms')
+        verbose_name = _('Grade')
+        verbose_name_plural = _('Grades')
 
 
 class School(models.Model):
@@ -35,11 +37,11 @@ class School(models.Model):
         _('School name'),
         max_length=255,
     )
-    classrooms = models.ForeignKey(
-        Classroom,
-        on_delete=models.CASCADE,
-        verbose_name=_('Classrooms'),
+    grade = models.ManyToManyField(
+        Grade,
+        verbose_name=_('Grade'),
         related_name='school',
+        blank=True,
     )
 
     def __str__(self):

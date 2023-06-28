@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Hogwarts{% endblock title %}
+{% block content %}
+<div id="wrapper">
+    <div class="search-block">
+      <form class="search-form" action="" method="GET">
+        <input type="text" name="query" placeholder="Search student" required>
+        <button type="submit">Search</button>
+      </form>
+    </div>
+    <br>
+    <div class="intro">
+        <h1>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium. Praesent urna urna, venenatis at
+            ultrices ac, viverra in turpis. Duis sceler isque mauri sut metus. </h1>
+    </div>
+    {% if search_students %}
+            {% for student in search_students %}
+                <div class="one-fourth">
+                    <a href="{% url 'detail' student.pk %}"><img src="{{ student.photo.url }}" alt="" width="200"/></a>
+                    <h4>{{ student.full_name }}</h4>
+                </div>
+            {% endfor %}
+    {% else %}
+    <div id="about">
+        {% for grade in grades %}
+            <h2>Grade: {{ grade.name }}</h2>
+            {% for student in grade.student.all %}
+                <div class="one-fourth"><a href="{% url 'detail' student.pk %}"><img src="{{ student.photo.url }}" alt="" width="200"/></a>
+                    <h4>{{ student.full_name }}</h4>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+<div class="clearfix"></div>
+<div class="push"></div>
+{% endblock content %}

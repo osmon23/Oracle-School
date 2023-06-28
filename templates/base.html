@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <title>{% block title %} {% endblock title %}</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" media="all"/>
+    <!--[if IE 7]>
+    <link rel="stylesheet" type="text/css" href="{% static 'style/css/ie7.css' %}" media="all"/><![endif]-->
+    <script type="text/javascript" src="{% static 'style/js/jquery-1.5.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'style/js/ddsmoothmenu.js' %}"></script>
+    <script type="text/javascript" src="{% static 'style/js/scripts.js' %}"></script>
+    <script type="text/javascript" src="{% static 'scripts/swfobject/swfobject.js' %}"></script>
+    <script type="text/javascript">
+        var flashvars = {};
+        flashvars.cssSource = "piecemaker.css";
+        flashvars.xmlSource = "piecemaker.xml";
+        var params = {};
+        params.play = "true";
+        params.menu = "false";
+        params.scale = "showall";
+        params.wmode = "transparent";
+        params.allowfullscreen = "true";
+        swfobject.embedSWF('piecemaker.swf', 'piecemaker', '960', '450', '10', null, flashvars, params, null);
+    </script>
+    <style>
+      .search-block {
+        width: 400px;
+      }
+
+      .search-form {
+        display: flex;
+      }
+
+      .search-form input[type="text"] {
+        flex: 1;
+        padding: 10px;
+        font-size: 16px;
+      }
+
+      .search-form button {
+        padding: 10px 20px;
+        font-size: 16px;
+      }
+
+      .student-details {
+        display: flex;
+        align-items: flex-start;
+      }
+
+      .photo-wrapper {
+        margin-right: 20px;
+      }
+
+      .actions {
+        margin-top: 20px;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 8px 16px;
+        font-size: 14px;
+        text-decoration: none;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .btn-edit {
+        background-color: #428bca;
+        color: #fff;
+      }
+
+      .btn-delete {
+        background-color: #d9534f;
+        color: #fff;
+      }
+    </style>
+</head>
+<body>
+    <div id="container">
+        {% include 'includes/header.html' %}
+        {% block content %} {% endblock %}
+        {% include 'includes/footer.html' %}
+    </div>
+</body>
+</html>
