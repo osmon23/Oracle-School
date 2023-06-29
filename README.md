@@ -52,7 +52,15 @@
 Замените your_secret_key на случайную строку символов, используемую в качестве секретного ключа Django. Задайте правильные значения для настроек электронной почты.
 Вместо пароля от почты нужно вставить пароль-приложении, если у вас нет, перейдите в google.com и создайте его.
 
-## Запустите контейнер Docker:
+## Docker & docker-compose
+
+Если у вас нет Docker и docker-compose:
+
+    sudo snap install docker
+    
+    sudo snap install docker-compose
+
+### Запустите контейнер Docker:
 
     docker-compose up -d
 
