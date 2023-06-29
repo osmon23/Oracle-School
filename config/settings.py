@@ -149,5 +149,12 @@ AUTH_USER_MODEL = 'accounts.Teacher'
 # PHONENUMBER DEFAULT REGION
 PHONENUMBER_DEFAULT_REGION = 'KG'
 
+EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = env_config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env_config('EMAIL_HOST_PASSWORD')
+
 with contextlib.suppress(ImportError):
     from .local_settings import *

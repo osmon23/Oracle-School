@@ -6,9 +6,10 @@
             <div id="menu-wrapper">
                 <div id="smoothmenu1" class="ddsmoothmenu">
                     <ul>
-                        <li><a href="{% url 'create_grade' %}">Create Grade</a></li>
-                        <li><a href="{% url 'add_student' %}">Add Student</a></li>
                         {% if user.is_authenticated %}
+                            <li><a href="{% url 'mailing' %}">Mailing</a></li>
+                            <li><a href="{% url 'create_grade' %}">Create Grade</a></li>
+                            <li><a href="{% url 'add_student' %}">Add Student</a></li>
                             <li><a href="{% url 'logout' %}">Logout</a></li>
                         {% else %}
                             <li><a href="{% url 'login' %}">Login</a></li>

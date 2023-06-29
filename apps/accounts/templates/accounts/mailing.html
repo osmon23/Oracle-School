@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Mailing{% endblock title %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-10 offset-md-1 col-md-6 offset-md-3">
+        <h1>Send Mailing</h1>
+            <form method="post">
+                {% csrf_token %}
+                    <label for="id_subject">Subject:</label>
+                    <input type="text" name="subject" id="id_subject" value="{{ subject }}" placeholder="Input Subject">
+                    <br>
+                    <label for="id_message">Message:</label>
+                    <textarea name="message" id="id_message" placeholder="Input Message" rows="15" cols="100">{{ message }}</textarea>
+                    <br>
+                    <button type="submit">Send</button>
+            </form>
+    </div>
+</div>
+{% endblock %}

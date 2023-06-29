@@ -62,7 +62,7 @@ class Student(models.Model):
     )
     gender = models.CharField(
         _('Gender'),
-        max_length=1,
+        max_length=10,
         choices=GenderChoices.choices,
         default=GenderChoices.MALE,
     )

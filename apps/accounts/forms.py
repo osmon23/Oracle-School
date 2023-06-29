@@ -49,3 +49,8 @@ class StudentForm(forms.ModelForm):
         widgets = {
             'date_of_birth': DatePickerInput(),
         }
+
+
+class NewsletterForm(forms.Form):
+    subject = forms.CharField(label='Subject')
+    message = forms.CharField(label='Message', widget=forms.Textarea)

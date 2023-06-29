@@ -1,8 +1,11 @@
-from django.http import HttpResponseNotAllowed
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.views import View
-from .forms import TeacherRegistrationForm, TeacherLoginForm, StudentForm
+from django.views.generic import CreateView
+
+from .models import Student
+from .utils import send_newsletter
+from .forms import TeacherRegistrationForm, TeacherLoginForm, StudentForm, NewsletterForm
 
 
 class TeacherRegistrationView(View):
@@ -44,20 +47,25 @@ class TeacherLogoutView(View):
         return redirect('index')
 
 
-class CreateStudentView(View):
-    def dispatch(self, request, *args, **kwargs):
-        if request.method != 'GET':
-            return HttpResponseNotAllowed(['GET'])
-        return super().dispatch(request, *args, **kwargs)
+class CreateStudentView(CreateView):
+    model = Student
+    form_class = StudentForm
+    template_name = 'accounts/add_student.html'
+    success_url = '/'
 
-    def get(self, request):
-        form = StudentForm()
-        return render(request, 'accounts/add_student.html', {'form': form})
+    def form_valid(self, form):
+        form.instance.photo = self.request.FILES.get('photo')
+        return super().form_valid(form)
 
-    def post(self, request):
-        form = StudentForm(request.POST, request.FILES)
+
+def newsletter(request):
+    if request.method == 'POST':
+        form = NewsletterForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('index')
-
-        return render(request, 'accounts/add_student.html', {'form': form})
+            subject = form.cleaned_data['subject']
+            message = form.cleaned_data['message']
+            send_newsletter(subject, message)
+            return render(request, 'accounts/success.html')
+    else:
+        form = NewsletterForm()
+    return render(request, 'accounts/mailing.html', {'form': form, 'subject': '', 'message': ''})
